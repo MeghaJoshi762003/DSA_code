@@ -5,6 +5,33 @@ struct node
     int data;
     struct node* link;
 };
+struct node* delete(struct node* p,int index)
+{
+    struct node* temp;
+    struct node* t;
+    temp=p;
+    struct node* prev;
+    prev=NULL;
+    if(index==1)
+    {
+        t=p;
+        p=p->link;
+        free(t);
+        return p;
+    }
+    else
+   { 
+       while(--index)
+    {
+        prev=temp;
+        temp=temp->link;   
+    }
+        t=prev->link;
+        prev->link=temp->link;
+        free(t);
+        return p;
+   }
+}
 struct node* insert(struct node*p,int value)
 {
     struct node* temp;
@@ -61,6 +88,15 @@ do
     printf("enter 1 to continue\n");
     scanf("%d",&flag);
 } while (flag==1);
+flag=1;
+do
+{   int t;
+    printf("enter the index to delete the node\n");
+    scanf("%d",&t);
+    head=delete(head,t);
+    printf("enter 1 to continue\n");
+    scanf("%d",&flag);
+}while(flag==1);
 printf("your list is\n");
 printlist(head);
 return 0;
