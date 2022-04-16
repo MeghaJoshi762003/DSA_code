@@ -1,4 +1,5 @@
 #include<stdio.h>
+#define MAX 10
 void readlist(int list[],int n)
 {   
     for(int i=0;i<n;i++)
@@ -6,11 +7,11 @@ void readlist(int list[],int n)
         scanf("%d",&list[i]);
     }
 }
-void printlist(int list[],int n)
+void printlist(int list1[],int n)
 {
     for(int i=0;i<n;i++)
     {
-        printf("%d ",list[i]);
+        printf("%d ",list1[i]);
     }
 }
 void merge(int list[],int list1[],int k,int m,int n)
@@ -45,14 +46,25 @@ while(j<=n)
     j++;
 }
 }
-mergesort(int list[],int n)
+void mergesort(int list[],int list1[],int l,int h)
 {
-    for(l=1;l<n;l=2*l+1)
-    {
-        
-    }
+   if(l<h)
+   {    int mid;
+       mid=(l+h)/2;
+       mergesort(list,list1,l,mid);
+       mergesort(list,list1,mid+1,h);
+       merge(list,list1,mid,l,h);
+   }
 }
 int main()
 {
-
+int list[MAX];
+int list1[MAX];
+int t;
+printf("enter the number of element in the array\n");
+scanf("%d",&t);
+readlist(list,t);
+mergesort(list,list1,0,t-1);
+printlist(list1,t);
+return 0;
 }
